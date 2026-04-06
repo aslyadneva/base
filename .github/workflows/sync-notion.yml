@@ -1,0 +1,34 @@
+# This workflow runs every time you push to main
+# It scans your src/app directory for routes and updates the Notion Base page
+ 
+name: Sync Base Routes to Notion
+ 
+# When does this run?
+on:
+  push:
+    branches: [main]
+    # Only run when files in src/app change — no point running for README edits
+    paths:
+      - 'src/app/**'
+ 
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      # Step 1: Check out your repo so the script can read your files
+      - uses: actions/checkout@v4
+ 
+      # Step 2: Set up Node so we can run the sync script
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+ 
+      # Step 3: Install the Notion SDK
+      - run: npm install @notionhq/client
+ 
+      # Step 4: Run the sync script with your secrets as environment variables
+      - run: node .github/scripts/sync-to-notion.js
+        env:
+          NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
+          NOTION_PAGE_ID: ${{ secrets.NOTION_PAGE_ID }}
+ 
