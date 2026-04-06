@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Sidebar,
   SidebarContent,
@@ -8,10 +10,13 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { LayoutDashboard, Settings, User2 } from "lucide-react";
+import { Atom, LayoutDashboard, Settings, User2 } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { BaseLogo } from "./BaseLogo";
 
 export const AppSidebar = () => {
+  const pathname = usePathname();
   return (
     <Sidebar>
       <SidebarHeader>
@@ -27,16 +32,25 @@ export const AppSidebar = () => {
           <SidebarGroupLabel className="uppercase tracking-[0.05em]">
             Overview
           </SidebarGroupLabel>
-          <SidebarMenuButton className="text-[13px]" isActive>
-            <LayoutDashboard />
-            <span>Dashboard</span>
+
+          <SidebarMenuButton className="text-[13px]" isActive={pathname === "/"} asChild>
+            <Link href="/">
+              <LayoutDashboard />
+              <span>Dashboard</span>
+            </Link>
           </SidebarMenuButton>
         </SidebarGroup>
-        {/* <SidebarGroup>
+        <SidebarGroup>
           <SidebarGroupLabel className="uppercase tracking-[0.05em]">
             Manage
           </SidebarGroupLabel>
-        </SidebarGroup> */}
+          <SidebarMenuButton className="text-[13px]" isActive={pathname.startsWith("/matter")} asChild>
+            <Link href="/matter">
+              <Atom />
+              <span>Matter</span>
+            </Link>
+          </SidebarMenuButton>
+        </SidebarGroup>
 
         <SidebarGroup className="mt-auto">
           <SidebarMenu>
