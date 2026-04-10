@@ -10,7 +10,13 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { Atom, LayoutDashboard, Settings, User2 } from "lucide-react";
+import {
+  ArrowLeftRight,
+  Atom,
+  LayoutDashboard,
+  Settings,
+  User2,
+} from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { BaseLogo } from "./BaseLogo";
@@ -33,7 +39,11 @@ export const AppSidebar = () => {
             Overview
           </SidebarGroupLabel>
 
-          <SidebarMenuButton className="text-[13px]" isActive={pathname === "/"} asChild>
+          <SidebarMenuButton
+            className="text-[13px]"
+            isActive={pathname === "/"}
+            asChild
+          >
             <Link href="/">
               <LayoutDashboard />
               <span>Dashboard</span>
@@ -44,10 +54,27 @@ export const AppSidebar = () => {
           <SidebarGroupLabel className="uppercase tracking-[0.05em]">
             Manage
           </SidebarGroupLabel>
-          <SidebarMenuButton className="text-[13px]" isActive={pathname.startsWith("/matter")} asChild>
+
+          <SidebarMenuButton
+            className="text-[13px]"
+            isActive={pathname.startsWith("/matter")}
+            asChild
+          >
             <Link href="/matter">
               <Atom />
               <span>Matter</span>
+            </Link>
+          </SidebarMenuButton>
+
+          <SidebarMenuButton
+            className="text-[13px]"
+            isActive={pathname.startsWith("/flow")}
+            asChild
+          >
+            <Link href="/flow">
+              <ArrowLeftRight />
+              {/* <Atom /> */}
+              <span>Flow</span>
             </Link>
           </SidebarMenuButton>
         </SidebarGroup>
