@@ -1,8 +1,8 @@
 "use client";
 import { useState } from "react";
-import MatterCard from "../components/MatterCard";
+import MatterCard from "../../components/MatterCard";
 import { Plus } from "lucide-react";
-import Accordion from "../components/Accordion";
+import Accordion from "../../components/Accordion";
 
 let id = 0;
 
